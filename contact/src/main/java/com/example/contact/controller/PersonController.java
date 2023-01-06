@@ -1,6 +1,7 @@
 package com.example.contact.controller;
 
 import com.example.contact.domain.Person;
+import com.example.contact.domain.dto.PersonDto;
 import com.example.contact.repository.PersonRepository;
 import com.example.contact.service.PersonService;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,20 @@ public class PersonController {
     @ResponseStatus(HttpStatus.CREATED)
     public void postPerson(@RequestBody Person person) {
         personService.put(person);
+
+        log.info("person -> {} ", personRepository.findAll());
+    }
+
+    @PutMapping("/{id}")
+    public void modifyPerson(@PathVariable Long id, @RequestBody PersonDto personDto) {
+        personService.modify(id, personDto);
+
+        log.info("person -> {} ", personRepository.findAll());
+    }
+
+    @PatchMapping("/{id}")
+    public void modifyPerson(@PathVariable Long id, String name) {
+        personService.modify(id, name);
 
         log.info("person -> {} ", personRepository.findAll());
     }
