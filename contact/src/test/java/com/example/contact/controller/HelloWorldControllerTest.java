@@ -13,6 +13,6 @@ class HelloWorldControllerTest {
 
     @Test
     public void helloWorld() {
-        assertThat(HelloWorldController.helloWorld()).isEqualTo("HelloWorld!");
+        assertThat(HelloWorldController.helloWorld()).isEqualTo("HelloWorld");
     }
 }

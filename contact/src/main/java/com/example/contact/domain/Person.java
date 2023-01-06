@@ -1,9 +1,9 @@
 package com.example.contact.domain;
 
+import com.example.contact.domain.dto.Birthday;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.*;
-
-import java.time.LocalDate;
 
 @Entity
 @NoArgsConstructor
@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Data
 public class Person {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NonNull
@@ -28,7 +28,9 @@ public class Person {
 
     private String address;
 
-    private LocalDate birthday;
+    @Valid
+    @Embedded
+    private Birthday birthday;
 
     private String job;
 
@@ -36,5 +38,6 @@ public class Person {
     private String phoneNumber;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
     private Block block;
 }
