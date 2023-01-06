@@ -1,22 +1,32 @@
 package com.example.contact.controller;
 
 import com.example.contact.domain.Person;
+import com.example.contact.repository.PersonRepository;
 import com.example.contact.service.PersonService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping(value = "/api/person")
 @RestController
+@Slf4j
 public class PersonController {
     @Autowired
     private PersonService personService;
+    @Autowired
+    private PersonRepository personRepository;
 
-    @GetMapping
-    @RequestMapping(value = "/{id}")
+    @GetMapping("/{id}")
     public Person getPerson(@PathVariable Long id) {
         return personService.getPerson(id);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void postPerson(@RequestBody Person person) {
+        personService.put(person);
+
+        log.info("person -> {} ", personRepository.findAll());
     }
 }

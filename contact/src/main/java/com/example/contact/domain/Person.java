@@ -3,6 +3,8 @@ package com.example.contact.domain;
 import com.example.contact.domain.dto.Birthday;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 @Entity
@@ -16,14 +18,19 @@ public class Person {
     private Long id;
 
     @NonNull
+    @NotEmpty
+    @Column(nullable = false)
     private String name;
 
     @NonNull
+    @Min(1)
     private int age;
 
     private String hobby;
 
+    @NotEmpty
     @NonNull
+    @Column(nullable = false)
     private String bloodType;
 
     private String address;
