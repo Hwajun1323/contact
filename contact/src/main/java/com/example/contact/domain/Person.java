@@ -1,9 +1,6 @@
 package com.example.contact.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -38,6 +35,6 @@ public class Person {
     @ToString.Exclude
     private String phoneNumber;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Block block;
 }
